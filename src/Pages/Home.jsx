@@ -1,8 +1,9 @@
+import SwipperSlide from "../Components/SwipperSlide";
 
 const Home = () => {
     return (
         <div>
-            <h1>HHHHHHHHHH</h1>
+            <SwipperSlide></SwipperSlide>
         </div>
     );
 };

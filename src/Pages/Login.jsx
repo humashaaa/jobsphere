@@ -3,6 +3,7 @@ import useAuth from "../useAuth/useAuth";
 import { useEffect, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import LottieReact from "../Components/LottieReact";
 
 const Login = () => {
   const { createUser, signInUser, googleSignin, user } = useAuth();
@@ -58,7 +59,8 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="flex items-center flex-row-reverse">
+      <LottieReact></LottieReact>
       <div className="flex justify-center ">
         <div className="w-full max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-50 dark:text-gray-800 ">
           <h2 className="mb-3 text-3xl font-semibold text-center">
@@ -136,9 +138,9 @@ const Login = () => {
               )}
             </div>
             <div className="form-control mt-6">
-              <Link className="btn btn-primary bg-blue-400 hover:bg-blue-500 border-none text-white text-xl">
+              <button className="btn btn-primary bg-blue-400 hover:bg-blue-500 border-none text-white text-xl">
                 Log in
-              </Link>
+              </button>
             </div>
           </form>
         </div>

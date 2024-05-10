@@ -1,7 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/icons8-working-64 (1).png";
+import useAuth from "../useAuth/useAuth";
+import { CgProfile } from "react-icons/cg";
 
 const Nav = () => {
+
+  const {logOut, user}= useAuth()
+  // const handleSignOut = ()=>{
+  //   logOut()
+  //   .then()
+  //   .catch()
+  // }
+
+
+
+
   return (
     <div className="navbar bg-base-100 p-4">
       <div className="navbar-start">
@@ -63,12 +76,49 @@ const Nav = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link
+
+      {
+    user? <div className="dropdown dropdown-end">
+        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <div className="w-11 rounded-full">
+                <img src={user?.photoURL || <CgProfile />
+ } />
+            </div>
+        </label>
+        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-blue-50 rounded-box md:w-52 w-20">
+            <li>
+                <button className="btn btn-sm  btn-ghost">{user?.displayName||'user name not found'}</button>
+
+            </li>
+            <li>
+                <button
+                    onClick={logOut}
+                    className="btn btn-sm hover:bg-blue-400  bg-blue-300 text-white">Log out</button>
+
+            </li>
+        </ul>
+    </div>
+        :
+
+         <Link
           className="bg-blue-400 md:w-28 w-15 h-10 text-xl btn hover:bg-blue-500 rounded-2xl  text-white font-bold"
           to="/login"
         >
           Login
-        </Link>
+        </Link> 
+
+
+
+        // <Link to='/login'>
+        //     <button className="bg-amber-600 md:w-28 w-15 h-10 text-xl btn rounded-2xl  text-white font-bold">Login</button>
+        // </Link>
+}
+
+
+
+
+
+       
       </div>
     </div>
   );
