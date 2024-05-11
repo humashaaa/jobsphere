@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import LottieReact from "../Components/LottieReact";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { createUser, signInUser, googleSignin, user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   //   console.log(location);
+ 
   const {
     register,
     handleSubmit,
@@ -19,29 +21,70 @@ const Login = () => {
     const { email, password } = data;
     console.log(data);
 
+
+    // const handleSignIn = async e => {
+    //   e.preventDefault()
+    //   // console.log({ email, pass })
+    //   try {
+    //     //User Login
+    //     const result = await signInUser(email, password)
+    //     console.log(result)
+    //     navigate('/')
+    //     toast.success('Signin Successful')
+    //   } catch (err) {
+    //     console.log(err)
+    //     toast.error(err?.message)
+    //   }
+    // }
+
     signInUser(email, password)
       .then((result) => {
         const loggedInUser = result.user;
         console.log(loggedInUser);
 
+        if (result.user) {
+                navigate("/");
+                        toast.success('Sign in Successfully')
+  
+              }
+
+
+
+
         const user = { email };
-        axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
-          .then((res) => {
-            console.log(res.data);
-            if (res.data) {
-              navigate("/");
-            }
-          });
+        console.log(user);
+
+        // axios
+        //   .post("http://localhost:5000/jwt", user, { withCredentials: true })
+        //   .then((res) => {
+        //     console.log(res.data);
+        //     if (res.data) {
+        //       navigate("/");
+        //               toast.success('Signin Successful')
+
+        //     }
+        //   });
 
         // if(result.user){
         //   navigate('/')
         // }
       })
       .catch((error) => {
+                toast.error(error?.message)
+
         console.log(error);
       });
   };
+
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     if (user) {
@@ -49,14 +92,25 @@ const Login = () => {
     }
   }, [user]);
 
-  const handleSocialLogin = (socialProvider) => {
-    socialProvider().then((result) => {
-      if (result.user) {
-        // navigate
-        navigate(location?.state || "/");
-      }
-    });
-  };
+  // const handleSocialLogin = (socialProvider) => {
+  //   socialProvider().then((result) => {
+  //     if (result.user) {
+  //       // navigate
+  //       navigate(location?.state || "/");
+  //     }
+  //   });
+  // };
+  const handleSocialLogin = async () => {
+    try {
+      await googleSignin()
+      toast.success('Sign in Successfully')
+      navigate(location?.state || "/")
+    } 
+    catch (err) {
+      console.log(err)
+      toast.error(err?.message)
+    }
+  }
 
   return (
     <div className="flex items-center flex-row-reverse">

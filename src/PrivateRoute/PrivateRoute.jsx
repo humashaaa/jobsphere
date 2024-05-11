@@ -8,7 +8,7 @@ const PrivateRoute = ({children}) => {
     console.log(user, loading);
 
     if(loading){
-        return <Lottie animationData={Loading}></Lottie>
+        return <p className="w-32"><Lottie animationData={Loading}></Lottie></p>
     }
     
     

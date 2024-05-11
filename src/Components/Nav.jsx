@@ -81,19 +81,19 @@ const Nav = () => {
     user? <div className="dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-11 rounded-full">
-                <img src={user?.photoURL || <CgProfile />
- } />
+                <img src={user?.photoURL } />
             </div>
         </label>
-        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-blue-50 rounded-box md:w-52 w-20">
+        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[50] p-2 shadow bg-blue-50 rounded-box md:w-52 w-20">
             <li>
                 <button className="btn btn-sm  btn-ghost">{user?.displayName||'user name not found'}</button>
 
             </li>
+            
             <li>
                 <button
                     onClick={logOut}
-                    className="btn btn-sm hover:bg-blue-400  bg-blue-300 text-white">Log out</button>
+                    className="btn btn-sm hover:bg-blue-500  bg-blue-400 text-white">Log out</button>
 
             </li>
         </ul>
