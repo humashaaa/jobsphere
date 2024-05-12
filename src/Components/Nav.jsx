@@ -48,6 +48,7 @@ const Nav = () => {
             <NavLink to="/register" className={({ isActive }) =>
               isActive ? "text-blue-400 text-xl font-bold" : "font-bold"
             }>Register</NavLink>
+            
           </ul>
         </div>
         <div className=" flex items-center justify-center gap-1">
@@ -67,6 +68,9 @@ const Nav = () => {
           >
             Home
           </NavLink>
+          <NavLink to="/allJobs"className={({ isActive }) =>
+              isActive ? "text-blue-400 text-xl font-bold" : "font-bold text-xl"
+            }>All Jobs</NavLink>
           <NavLink to="/about"className={({ isActive }) =>
               isActive ? "text-blue-400 text-xl font-bold" : "font-bold text-xl"
             }>About</NavLink>
@@ -84,11 +88,22 @@ const Nav = () => {
                 <img src={user?.photoURL } />
             </div>
         </label>
-        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[50] p-2 shadow bg-blue-50 rounded-box md:w-52 w-20">
+        <ul tabIndex={0} className="menu menu-sm  dropdown-content mt-3 z-[50] p-2 shadow bg-blue-50 rounded-box md:w-52 w-20">
             <li>
-                <button className="btn btn-sm  btn-ghost">{user?.displayName||'user name not found'}</button>
+                <button className="btn btn-sm font-extrabold mb-1  btn-ghost">{user?.displayName||'user name not found'}</button>
 
             </li>
+           <div className="space-y-1 mb-2 flex flex-col">
+           <NavLink to='/myJobs' className={({ isActive }) =>
+              isActive ? "text-blue-500  font-bold" : "font-bold "
+            }>My Jobs</NavLink>
+            <NavLink to='/addJobs' className={({ isActive }) =>
+              isActive ? "text-blue-500  font-bold" : "font-bold "
+            }>Add A Job</NavLink>
+            <NavLink to='/appliedJobs' className={({ isActive }) =>
+              isActive ? "text-blue-500  font-bold" : "font-bold "
+            }>Applied Jobs</NavLink>
+           </div>
             
             <li>
                 <button

@@ -36,18 +36,14 @@ const JobCard = ({ job }) => {
 
           <p> <span className="font-semibold"> Applicants number</span>: {applicantsNumber}</p>
          
-            <p> <span className="font-semibold">Job posting date</span>: {postingDate}</p>
-          <p> <span className="font-semibold text-red-700">Application Ends</span>:{deadline}</p>
+            <p> <span className="font-semibold">Job posting date</span>:  {new Date(postingDate).toLocaleDateString()}</p>
+          <p> <span className="font-semibold text-red-700">Application Ends</span>: {new Date(deadline).toLocaleDateString()}</p>
 
           
           <div className="card-actions justify-center mt-4">
             <Link to={`/job/${_id}`} className="btn bg-blue-500 hover:bg-blue-700 text-white">View Details</Link>
           </div>
 
-          {/* <p>{category}</p> */}
-          {/* <p title={description}>{description.substring(0,30)}...</p>
-          <p> min price:{min_price}</p>
-          <p> max price:{max_price}</p> */}
         </div>
       </div>
     </div>

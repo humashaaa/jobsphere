@@ -12,6 +12,10 @@ import ErrorPage from "./Pages/ErrorPage";
 import { Toaster } from "react-hot-toast";
 import JobDetails from "./Pages/JobDetails";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import AllJobs from "./Pages/AllJobs";
+import AddJobs from "./Pages/AddJobs";
+import MyJobs from "./Pages/MyJobs";
+import AppliedJobs from "./Pages/AppliedJobs";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +47,22 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/allJobs",
+        element: <AllJobs></AllJobs>
+      },
+      {
+        path: "/addJobs",
+        element: <PrivateRoute><AddJobs></AddJobs></PrivateRoute>
+      },
+      {
+        path: "/myJobs",
+        element: <PrivateRoute><MyJobs></MyJobs></PrivateRoute>
+      },
+      {
+        path: "/appliedJobs",
+        element: <PrivateRoute><AppliedJobs></AppliedJobs></PrivateRoute>
       },
     ],
   },

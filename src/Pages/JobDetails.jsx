@@ -1,5 +1,7 @@
-import { useLoaderData } from 'react-router-dom';
-import img from '../assets/hire.jpg'
+import { useLoaderData, useNavigate } from 'react-router-dom';
+// import img from '../assets/hire.jpg'
+import Lottie from 'lottie-react'
+import hire from '../assets/hire.json'
 import useAuth from '../useAuth/useAuth';
 import { SiTicktick } from "react-icons/si";
 import DatePicker from "react-datepicker";
@@ -11,6 +13,7 @@ import toast from 'react-hot-toast';
 
 const JobDetails = () => {
     const { user } = useAuth();
+    const navigate = useNavigate()
 //   console.log(user);
   const job = useLoaderData();
   const [startDate, setStartDate] = useState(new Date());
@@ -18,18 +21,22 @@ const JobDetails = () => {
 
     const {
         category,
-        buyerName,
         jobTitle,
+        buyerName,
         postingDate,
         deadline,
+        description,
         applicantsNumber,
         min_price,
         max_price
       } = job;
+      console.log(job);
 
       const handleFormSubmit = async (e) => {
         
         e.preventDefault();
+        if (user?.email === job.buyer?.email)
+          return toast.error('Action not permitted!')
         // const jobId = _id;
         const price = parseFloat(e.target.price.value);
         if (price < parseFloat(min_price))
@@ -57,6 +64,8 @@ const JobDetails = () => {
               applyData
             )
             console.log(data)
+            toast.success('You Applied For This Job Successfully!')
+            navigate('/myJobs')
           } catch (err) {
             console.log(err)
             console.log(err.message)
@@ -65,36 +74,56 @@ const JobDetails = () => {
       
           
     return (
-        <div className='relative'>
-            <div >
-                <img className='w-full h-[700px]' src={img} alt="" />
-            </div>
+        <div className='flex  mt-10 flex-row-reverse'>
+              {/* <div>
+        <Lottie animationData={hire}></Lottie>
+    </div>  */}
 
-            <div className="mx-auto card w-[70rem] bg-base-100 shadow-xl absolute top-[19rem] left-48">
+            <div className="mx-auto card w-[65rem] bg-base-100 shadow-xl ">
   <div className="card-body">
-  <p className='flex justify-end'>
-            <span className="px-3 py-1 text-[13px] text-blue-800 uppercase bg-blue-200 rounded-full ">
+  <div>
+    <div className='relative'>
+    <p className='flex justify-start absolute top-4'>
+            <span className="px-4 py-1 text-[12px] text-blue-800 uppercase bg-blue-200 rounded-lg   ">
               {category}
             </span>
           </p>
+    </div>
+    <div>
+
+      <img className='h-[25rem] w-full' src={job.buyer.photo} alt="" />
+
+    </div>
+  </div>
          <div >
             
-            <h1 className='font-bold text-3xl text-center'>{jobTitle}</h1>
-
+            {/* <h1 className='font-bold text-3xl text-center'>{jobTitle}</h1> */}
+            <h1 className='font-semibold mb-6 mt-6 text-3xl text-center text-gray-700'>Job Information</h1>
 
        <div className='flex mt-9'>
        <div className="container p-2 mx-auto sm:p-4 dark:text-gray-800 mt-3">
-	<div className="overflow-x-auto">
+	<div className='flex items-center justify-around'>
+
+  <div className="overflow-x-auto">
 		<table className="">
 			
 			<tbody>
-                <tr> <h1 className='font-semibold mb-6 text-2xl  text-gray-700'>Job Information</h1></tr>
+                {/* <tr> </tr> */}
 				<tr className="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
 					<td className="p-3">
-						<p className='text-gray-500'>Company name</p>
+						<p className='text-gray-500'>Buyer Name</p>
 					</td>
 					<td className="p-3">
 						<p className='font-semibold text-xl'> {buyerName}</p>
+					</td>
+					
+				</tr>
+				<tr className="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
+					<td className="p-3">
+						<p className='text-gray-500'>Buyer Email</p>
+					</td>
+					<td className="p-3">
+						<p className='font-semibold text-gray-600'> {job.buyer.email}</p>
 					</td>
 					
 				</tr>
@@ -112,7 +141,7 @@ const JobDetails = () => {
 						<p className='text-gray-500'>Offered Salary</p>
 					</td>
 					<td className="p-3">
-						<p className='font-semibold'> ${min_price} - ${max_price}/year</p>
+						<p className='font-semibold'> ${min_price} - ${max_price}/month</p>
 					</td>
 					
 				</tr>
@@ -129,10 +158,23 @@ const JobDetails = () => {
 			</tbody>
 		</table>
 	</div>
+
+
+    <div>
+      {/* description */}
+      <h1 className='text-xl font-bold text-center mt-5 mb-4'>What we are looking for</h1>
+      <p className='w-[26rem]'>{description}</p>
+    </div>
+  </div>
 </div>
-        <div className='mt-3'>
+       
+       </div>
+         </div>
+  </div>
+
+  <div className='mt-3 mx-auto'>
         <section className="p-6 w-[35rem]  bg-white rounded-md shadow-md flex-1 md:min-h-[350px] ">
-        <h2 className="text-lg font-bold text-gray-700 capitalize ">
+        <h2 className="text-lg text-center mb-4 space-y-4 font-bold text-gray-700 capitalize ">
           Apply For This Job
         </h2>
 
@@ -178,7 +220,7 @@ const JobDetails = () => {
             <div className="flex flex-col gap-2 ">
               <label className="text-gray-700">Deadline</label>
     
-              <DatePicker className="border p-2 rounded-md block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring" selected={startDate} onChange={(date) => setStartDate(date)} />
+              <DatePicker className=" p-2  block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring" selected={startDate} onChange={(date) => setStartDate(date)} />
 
             </div>
           </div>
@@ -194,16 +236,14 @@ const JobDetails = () => {
         </form>
       </section>
         </div>
-       </div>
-         </div>
-  </div>
-
-
-
-
 
 
 </div>
+
+
+
+
+
         </div>
     );
 };
