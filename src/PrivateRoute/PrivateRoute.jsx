@@ -8,7 +8,7 @@ const PrivateRoute = ({children}) => {
     console.log(user, loading);
 
     if(loading){
-        return <div className="flex justify-center items-center"><p className="w-32 "><Lottie animationData={Loading}></Lottie></p></div>
+        return <div className="flex justify-center items-center mt-24"><p className="w-32 "><Lottie animationData={Loading}></Lottie></p></div>
     }
     
     
