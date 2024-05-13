@@ -30,7 +30,7 @@ const JobDetails = () => {
         min_price,
         max_price
       } = job;
-      console.log(job);
+      // console.log(job);
 
       const handleFormSubmit = async (e) => {
         
@@ -42,6 +42,7 @@ const JobDetails = () => {
         if (price < parseFloat(min_price))
             return toast.error('You have to offer more or at least equal to Minimum Price')
         const comment = e.target.comment.value;
+        const jobTitle = e.target.jobTitle.value;
         const email = user?.email;
         const deadline = startDate
         const status = "pending";
@@ -54,6 +55,7 @@ const JobDetails = () => {
             buyerName,
             category,
             deadline,
+            jobTitle
           };
           console.table(applyData);
     
@@ -65,7 +67,7 @@ const JobDetails = () => {
             )
             console.log(data)
             toast.success('You Applied For This Job Successfully!')
-            navigate('/myJobs')
+            navigate('/appliedJobs')
           } catch (err) {
             console.log(err)
             console.log(err.message)
@@ -111,13 +113,21 @@ const JobDetails = () => {
                 {/* <tr> </tr> */}
 				<tr className="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
 					<td className="p-3">
+						<p className='text-gray-500'>Job Title</p>
+					</td>
+					<td className="p-3">
+						<p className='font-bold text-xl'> {jobTitle}</p>
+					</td>					
+				</tr>
+				<tr className="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
+					<td className="p-3">
 						<p className='text-gray-500'>Buyer Name</p>
 					</td>
 					<td className="p-3">
-						<p className='font-semibold text-xl'> {buyerName}</p>
-					</td>
-					
+						<p className='font-semibold '> {buyerName}</p>
+					</td>					
 				</tr>
+
 				<tr className="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
 					<td className="p-3">
 						<p className='text-gray-500'>Buyer Email</p>
@@ -181,6 +191,20 @@ const JobDetails = () => {
         <form onSubmit={handleFormSubmit}>
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
+            <div>
+              <label className="text-gray-700 " htmlFor="jobTitle">
+                Position
+              </label>
+              <input
+                id="jobTitle"
+                type="text"
+                name="jobTitle"
+                defaultValue={jobTitle}
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+              />
+            </div>
+            </div>
+            <div>
               <label className="text-gray-700 " htmlFor="price">
                 Price
               </label>
@@ -220,7 +244,7 @@ const JobDetails = () => {
             <div className="flex flex-col gap-2 ">
               <label className="text-gray-700">Deadline</label>
     
-              <DatePicker className=" p-2  block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring" selected={startDate} onChange={(date) => setStartDate(date)} />
+              <DatePicker className=" p-2  block w-60 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring" selected={startDate} onChange={(date) => setStartDate(date)} />
 
             </div>
           </div>

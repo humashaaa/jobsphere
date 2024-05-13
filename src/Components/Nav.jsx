@@ -103,6 +103,9 @@ const Nav = () => {
             <NavLink to='/appliedJobs' className={({ isActive }) =>
               isActive ? "text-blue-500  font-bold" : "font-bold "
             }>Applied Jobs</NavLink>
+            <NavLink to='/jobRequest' className={({ isActive }) =>
+              isActive ? "text-blue-500  font-bold" : "font-bold "
+            }>Job Request</NavLink>
            </div>
             
             <li>
