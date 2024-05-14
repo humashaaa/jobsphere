@@ -18,7 +18,19 @@ const JobRequest = () => {
     )
     setJobs(data)
   }
-  console.log(jobs);
+  // console.log(jobs);
+
+  // const handleStatus = async(id, previous, status)=>{
+  //   // console.log(id, previous, status);
+  //   const { data } = await axios.patch(
+  //     `${import.meta.env.VITE_URL}/myJob/${id}`, 
+  //     {status}
+  //   )
+  //   console.log(data);
+  //   getData()
+
+
+  // }
 
 
   return (
@@ -160,9 +172,9 @@ const JobRequest = () => {
                         <div className='flex items-center gap-x-6'>
                           {/* Accept Button: In Progress */}
                           <button
-                            // onClick={() =>
-                            //   handleStatus(job._id, job.status, 'In Progress')
-                            // }
+                            onClick={() =>
+                              handleStatus(job._id, job.status, 'In Progress')
+                            }
                             disabled={job.status === 'Complete'}
                             className='disabled:cursor-not-allowed text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none'
                           >
@@ -183,9 +195,9 @@ const JobRequest = () => {
                           </button>
                           {/* Reject Button */}
                           <button
-                            // onClick={() =>
-                            //   handleStatus(job._id, job.status, 'Rejected')
-                            // }
+                            onClick={() =>
+                              handleStatus(job._id, job.status, 'Rejected')
+                            }
                             disabled={job.status === 'Complete'}
                             className='disabled:cursor-not-allowed text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none'
                           >

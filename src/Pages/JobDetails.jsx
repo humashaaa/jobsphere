@@ -28,7 +28,8 @@ const JobDetails = () => {
         description,
         applicantsNumber,
         min_price,
-        max_price
+        max_price,
+        buyer
       } = job;
       // console.log(job);
 
@@ -43,6 +44,7 @@ const JobDetails = () => {
             return toast.error('You have to offer more or at least equal to Minimum Price')
         const comment = e.target.comment.value;
         const jobTitle = e.target.jobTitle.value;
+
         const email = user?.email;
         const deadline = startDate
         const status = "pending";
@@ -55,6 +57,7 @@ const JobDetails = () => {
             buyerName,
             category,
             deadline,
+            buyer,
             jobTitle
           };
           console.table(applyData);

@@ -2,34 +2,55 @@ import { useEffect, useState } from 'react'
 
 import axios from 'axios'
 import useAuth from '../useAuth/useAuth'
-// import useAxiosSecure from '../hooks/useAxiosSecure'
+import { useQuery } from '@tanstack/react-query'
 
 const AppliedJob = () => {
-//   const axiosSecure = useAxiosSecure()
   const { user } = useAuth()
 
-  const [appliedJobs, setAppliedJobs] = useState([])
+  const {isPending, data: appliedJobs, isError, error} = useQuery({
+    queryKey: ['appliedJobs'],
+    queryFn: async ()=>{
+        const res = await fetch(`${import.meta.env.VITE_URL}/appliedJobs/${user?.email}`);
+        return res.json()
+    }
+})
 
-  useEffect(() => {
-    getData()
-  }, [user])
+if(isPending){
+    return <div className="item-center justify-center"><span className="loading loading-spinner text-neutral"></span></div>
 
-  const getData = async () => {
-    const { data } = await axios(
-      `${import.meta.env.VITE_URL}/appliedJobs/${user?.email}`
-    )
-    setAppliedJobs(data)
-  }
-  console.log(appliedJobs);
+}
+if(isError) return <p>{error.message}</p>
 
-  const handleStatus = async (id, status) => {
-    const { data } = await axios.patch(
-      `${import.meta.env.VITE_URL}/bid/${id}`,
-      { status }
-    )
-    console.log(data)
-    getData()
-  }
+
+
+
+
+
+
+  // const [appliedJobs, setAppliedJobs] = useState([])
+
+  // useEffect(() => {
+  //   getData()
+  // }, [user])
+
+  // const getData = async () => {
+  //   const { data } = await axios(
+  //     `${import.meta.env.VITE_URL}/appliedJobs/${user?.email}`
+  //   )
+  //   setAppliedJobs(data)
+  // }
+  // console.log(appliedJobs);
+
+
+
+  // const handleStatus = async (id, status) => {
+  //   const { data } = await axios.patch(
+  //     `${import.meta.env.VITE_URL}/bid/${id}`,
+  //     { status }
+  //   )
+  //   console.log(data)
+  //   getData()
+  // }
   return (
     <section className='container px-4 mx-auto pt-12'>
       <div className='flex items-center gap-x-3'>

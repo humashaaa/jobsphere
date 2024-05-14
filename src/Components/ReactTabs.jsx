@@ -5,7 +5,7 @@ const ReactTabs = ({jobs}) => {
     return (
         <Tabs>
         
-       <div className='font-semibold text-xl'>
+       <div className='font-semibold md:text-xl '>
        <TabList>
           <Tab >On Site Job</Tab>
           <Tab >Remote Job</Tab>

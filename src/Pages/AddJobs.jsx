@@ -57,7 +57,7 @@ const AddJobs = () => {
   return (
    <div className='flex'>
    
-     <div className='flex justify-center items-center min-h-[calc(100vh-306px)] my-12'>
+     <div className='flex  justify-center items-center min-h-[calc(100vh-306px)] my-12'>
       <section className=' p-2 md:p-6 mx-auto bg-white rounded-md shadow-md '>
         <h2 className='text-lg font-semibold text-center  text-gray-700 capitalize '>
           Post a Job
@@ -65,7 +65,7 @@ const AddJobs = () => {
 
         <form onSubmit={handleFormSubmit}>
 
-        <div className='flex items-center gap-7 mt-10'>
+        <div className='flex items-center gap-7 mt-10 md:flex-row flex-col'>
         <div>
               <label className='text-gray-700 ' htmlFor='jobTitle'>
                 Job Title
@@ -74,7 +74,7 @@ const AddJobs = () => {
                 id='jobTitle'
                 name='jobTitle'
                 type='text'
-                className='block w-80 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+                className='block w-full md:w-80 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
               />
             </div>
 
@@ -86,7 +86,7 @@ const AddJobs = () => {
                 id='photo_URL'
                 name='photo'
                 type='text'
-                className='block w-80 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+                className='block w-full md:w-80 px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
               />
             </div>
             </div>
