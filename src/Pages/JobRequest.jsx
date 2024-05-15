@@ -2,22 +2,48 @@ import toast from 'react-hot-toast'
 import useAuth from '../useAuth/useAuth'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
 
 const JobRequest = () => {
   const { user } = useAuth()
 
-  const [jobs, setJobs] = useState([])
+  // const [jobs, setJobs] = useState([])
 
-  useEffect(() => {
-    getData()
-  }, [user])
+  // useEffect(() => {
+  //   getData()
+  // }, [user])
 
-  const getData = async () => {
-    const { data } = await axios(
-      `${import.meta.env.VITE_URL}/jobRequest/${user?.email}`
-    )
-    setJobs(data)
-  }
+ 
+
+
+  const {isPending, data: jobs = [], isError, error} = useQuery({
+    queryKey: ['jobRequest', user?.email],
+    queryFn: ()=> getData()
+  //   async ()=>{
+  //     const res = await fetch(`${import.meta.env.VITE_URL}/jobRequest/${user?.email}`);
+  //     return res.json()
+  // }
+})
+console.log(jobs);
+const getData = async () => {
+  const { data } = await axios(
+    `${import.meta.env.VITE_URL}/jobRequest/${user?.email}`
+  )
+  return data
+}
+
+if(isPending){
+    return <div className="item-center justify-center"><span className="loading loading-spinner text-neutral"></span></div>
+}
+if(isError) return <p>{error.message}</p>
+
+
+
+
+
+
+
+
   // console.log(jobs);
 
   // const handleStatus = async(id, previous, status)=>{

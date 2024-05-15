@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react'
 
-import axios from 'axios'
+// import axios from 'axios'
 import useAuth from '../useAuth/useAuth'
 import { useQuery } from '@tanstack/react-query'
 
 const AppliedJob = () => {
-  const { user } = useAuth()
 
-  const {isPending, data: appliedJobs, isError, error} = useQuery({
+  const { user } = useAuth()
+  const [filter, setFilter] = useState('')
+
+  const {isPending, data: appliedJobs, isError, error, refetch} = useQuery({
     queryKey: ['appliedJobs'],
     queryFn: async ()=>{
-        const res = await fetch(`${import.meta.env.VITE_URL}/appliedJobs/${user?.email}`);
+        const res = await fetch(`${import.meta.env.VITE_URL}/appliedJobs/${user?.email}?filter=${filter}`);
         return res.json()
     }
 })
-
+useEffect(()=>{
+  refetch()
+}, [filter, refetch])
 if(isPending){
     return <div className="item-center justify-center"><span className="loading loading-spinner text-neutral"></span></div>
 
@@ -45,21 +49,53 @@ if(isError) return <p>{error.message}</p>
 
   // const handleStatus = async (id, status) => {
   //   const { data } = await axios.patch(
-  //     `${import.meta.env.VITE_URL}/bid/${id}`,
+  //     `${import.meta.env.VITE_URL}/jobs/${id}`,
   //     { status }
   //   )
   //   console.log(data)
   //   getData()
   // }
+ 
+  
   return (
     <section className='container px-4 mx-auto pt-12'>
-      <div className='flex items-center gap-x-3'>
+     <div className='flex items-center justify-between'>
+     <div className='flex items-center gap-x-3'>
         <h2 className='text-lg font-medium text-gray-800 '>My Applied Job</h2>
 
         <span className='px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full '>
         Applied on {appliedJobs.length} Jobs 
         </span>
       </div>
+
+      <div>
+            <select
+              onChange={e => {
+                setFilter(e.target.value)
+                refetch()
+              }}
+              value={filter}
+              name='category'
+              id='category'
+              className='border p-4 rounded-lg'
+            >
+              <option value=''>Filter By Category</option>
+              <option value='On-site Job'>On-site Job</option>
+              <option value='Remote Job'>Remote Job</option>
+              <option value='Hybrid'>Hybrid</option>
+              <option value='Part-time'>Part Time </option>
+            </select>
+          </div>
+
+     </div>
+
+
+
+
+
+
+
+
 
       <div className='flex flex-col mt-6'>
         <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>

@@ -10,6 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useMutation } from '@tanstack/react-query';
 
 const JobDetails = () => {
     const { user } = useAuth();
@@ -31,7 +32,31 @@ const JobDetails = () => {
         max_price,
         buyer
       } = job;
-      // console.log(job);
+      console.log(job);
+
+
+
+    //   const {isPending, data: job =[], isError, error, mutateAsync} = useMutation({
+    //     mutationFn: async(id)=>{
+    //       const { data } = await axios.patch(`/bid/${id}`)
+    //   console.log(data)
+    //   return data
+
+    //     }
+       
+    // })
+    
+    // if(isPending){
+    //     return <div className="item-center justify-center"><span className="loading loading-spinner text-neutral"></span></div>
+    // }
+    // if(isError) return <p>{error.message}</p>
+
+
+
+
+
+
+
 
       const handleFormSubmit = async (e) => {
         
@@ -63,7 +88,7 @@ const JobDetails = () => {
           console.table(applyData);
     
 
-        try {
+          try {
             const { data } = await axios.post(
               `${import.meta.env.VITE_URL}/appliedJobs`,
               applyData
@@ -75,14 +100,19 @@ const JobDetails = () => {
             console.log(err)
             console.log(err.message)
           }
+    
+// mutateAsync({id})
         }
+
+      
+      
+ 
+
       
           
     return (
         <div className='flex  mt-10 flex-row-reverse'>
-              {/* <div>
-        <Lottie animationData={hire}></Lottie>
-    </div>  */}
+             
 
             <div className="mx-auto card w-[65rem] bg-base-100 shadow-xl ">
   <div className="card-body">

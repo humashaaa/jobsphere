@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Pages/Home";
-// import About from "./Pages/About";
 import Login from "./Pages/Login";
+import Blogs from "./Pages/Blogs";
 import Register from "./Pages/Register";
 import Root from "./Layout/Root";
 import AuthProvider from "./AuthProvider/AuthProvider";
@@ -53,10 +53,10 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_URL}/job/${params.id}`),
       },
-      // {
-      //   path: "/about",
-      //   element: <About></About>,
-      // },
+      {
+        path: "/blogs",
+        element: <Blogs></Blogs>
+      },
       {
         path: "/login",
         element: <Login></Login>,

@@ -38,13 +38,25 @@ const AllJobs = () => {
     // console.log(jobs);
     return (
         <section className='container px-4 mx-auto pt-12'>
-      <div className='flex items-center gap-x-3'>
+     
+    
+     <div className='flex items-center gap-x-3'>
         <h2 className='text-lg font-medium text-gray-800 '>Currently Available Jobs</h2>
 
         <span className='px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full '>
         Available {jobs.length} Jobs 
         </span>
       </div>
+
+    
+  
+
+
+
+
+
+
+
 
       <div className='flex flex-col mt-6'>
         <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
@@ -138,7 +150,9 @@ const AllJobs = () => {
                         </div>
                       </td>
                       <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
-                      {/* <Link to={`/job/${_id}`} className="btn bg-blue-500 hover:bg-blue-700 text-white">View Details</Link> */}
+                      <Link
+                      //  to={`/job/${_id}`}
+                        className="btn bg-blue-500 hover:bg-blue-700 text-white">View Details</Link>
                       </td>
                     </tr>
                   ))}

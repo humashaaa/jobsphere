@@ -63,9 +63,9 @@ const Nav = () => {
             <NavLink to="/" className={({ isActive }) =>
               isActive ? "text-blue-400 text-xl font-bold" : "font-bold text-xl"
             }>Home</NavLink>
-            <NavLink to="/about" className={({ isActive }) =>
+            <NavLink to="/blogs" className={({ isActive }) =>
               isActive ? "text-blue-400 text-xl font-bold" : "font-bold"
-            }>About</NavLink>
+            }>Blogs</NavLink>
             <NavLink to="/register" className={({ isActive }) =>
               isActive ? "text-blue-400 text-xl font-bold" : "font-bold"
             }>Register</NavLink>
@@ -92,9 +92,9 @@ const Nav = () => {
           <NavLink to="/allJobs"className={({ isActive }) =>
               isActive ? "text-blue-400 text-xl font-bold" : "font-bold text-xl"
             }>All Jobs</NavLink>
-          <NavLink to="/about"className={({ isActive }) =>
+          <NavLink to="/blogs"className={({ isActive }) =>
               isActive ? "text-blue-400 text-xl font-bold" : "font-bold text-xl"
-            }>About</NavLink>
+            }>Blogs</NavLink>
           <NavLink to="/register"className={({ isActive }) =>
               isActive ? "text-blue-400 text-xl font-bold" : "font-bold text-xl"
             }>Register</NavLink>
