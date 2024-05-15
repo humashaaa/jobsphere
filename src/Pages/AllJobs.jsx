@@ -6,14 +6,20 @@ import { Link } from "react-router-dom";
 
 const AllJobs = () => {
     const { user } = useAuth()
+    const [search, setSearch] = useState('')
+    const [searchText, setSearchText] = useState('')
 
-    const {isPending, data: jobs, isError, error} = useQuery({
+    const {isPending, data: jobs, isError, error, refetch} = useQuery({
       queryKey: ['jobs'],
       queryFn: async ()=>{
-          const res = await fetch(`${import.meta.env.VITE_URL}/jobs`);
+          const res = await fetch(`${import.meta.env.VITE_URL}/jobs?search=${search}`);
           return res.json()
       }
   })
+
+  useEffect(()=>{
+    refetch()
+  }, [search, refetch])
   
   if(isPending){
       return <div className="item-center justify-center"><span className="loading loading-spinner text-neutral"></span></div>
@@ -36,8 +42,42 @@ const AllJobs = () => {
     //   setJobs(data)
     // }
     // console.log(jobs);
+
+    const handleSearch = e => {
+      e.preventDefault()
+  
+      setSearch(searchText)
+    }
+  
+    console.log(search)
+
+
+
     return (
         <section className='container px-4 mx-auto pt-12'>
+
+<form
+ onSubmit={handleSearch}
+ >
+            <div className='flex p-1 overflow-hidden  rounded-lg    focus-within:border-blue-400 focus-within:ring-blue-300 items-center justify-center'>
+              <input
+                className='px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent'
+                type='text'
+                onChange={e => {setSearchText(e.target.value)
+                  refetch()
+                }
+                }
+                value={searchText}
+                name='search'
+                placeholder='Enter Job Title'
+                aria-label='Enter Job Title'
+              />
+
+              <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-blue-500 rounded-md '>
+                Search
+              </button>
+            </div>
+          </form>
      
     
      <div className='flex items-center gap-x-3'>

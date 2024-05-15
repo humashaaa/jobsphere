@@ -7,6 +7,7 @@ const ReactTabs = ({jobs}) => {
         
        <div className='font-semibold md:text-xl '>
        <TabList>
+          <Tab >All Jobs</Tab>
           <Tab >On Site Job</Tab>
           <Tab >Remote Job</Tab>
           <Tab >Hybrid</Tab>
@@ -16,6 +17,13 @@ const ReactTabs = ({jobs}) => {
     
     
       
+       <TabPanel>
+         <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8'>
+         {
+            jobs.map(job=><JobCard key={job.job_id} job={job}></JobCard>)
+          }
+         </div>
+        </TabPanel>
        <TabPanel>
          <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8'>
          {

@@ -18,6 +18,7 @@ const JobDetails = () => {
 //   console.log(user);
   const job = useLoaderData();
   const [startDate, setStartDate] = useState(new Date());
+  const currentTime = Date.now();
 
 
     const {
@@ -69,9 +70,12 @@ const JobDetails = () => {
             return toast.error('You have to offer more or at least equal to Minimum Price')
         const comment = e.target.comment.value;
         const jobTitle = e.target.jobTitle.value;
+        const resume = e.target.resume.value;
 
         const email = user?.email;
         const deadline = startDate
+        if ( deadline > currentTime) 
+          return toast.error('Deadline has passed.')
         const status = "pending";
         const applyData = {
             // jobId,
@@ -83,7 +87,8 @@ const JobDetails = () => {
             category,
             deadline,
             buyer,
-            jobTitle
+            jobTitle,
+            resume
           };
           console.table(applyData);
     
@@ -197,6 +202,15 @@ const JobDetails = () => {
 					</td>
 					
 				</tr>
+				<tr className="border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
+					<td className="p-3">
+						<p className='text-gray-500'>Deadline</p>
+					</td>
+					<td className="p-3">
+						<p className='font-semibold'>{new Date(deadline).toLocaleDateString()}</p>
+					</td>
+					
+				</tr>
 				
 			</tbody>
 		</table>
@@ -281,6 +295,17 @@ const JobDetails = () => {
 
             </div>
           </div>
+            <div>
+              <label className="text-gray-700" htmlFor="comment">Submit Your Resume</label>
+              <input
+                id="resume"
+                name="resume"
+                type="file"
+                placeholder='your resume'
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+              />
+
+            </div>
 
           <div className="flex justify-end mt-6">
             <button

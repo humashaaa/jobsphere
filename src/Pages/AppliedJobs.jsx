@@ -1,4 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+// import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
+import { usePDF } from 'react-to-pdf';
+import generatePDF from 'react-to-pdf';
+
+
 
 // import axios from 'axios'
 import useAuth from '../useAuth/useAuth'
@@ -8,6 +13,10 @@ const AppliedJob = () => {
 
   const { user } = useAuth()
   const [filter, setFilter] = useState('')
+  // const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
+  const targetRef = useRef();
+
+
 
   const {isPending, data: appliedJobs, isError, error, refetch} = useQuery({
     queryKey: ['appliedJobs'],
@@ -91,12 +100,6 @@ if(isError) return <p>{error.message}</p>
 
 
 
-
-
-
-
-
-
       <div className='flex flex-col mt-6'>
         <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='inline-block min-w-full py-2 align-middle md:px-6 lg:px-8'>
@@ -145,6 +148,14 @@ if(isError) return <p>{error.message}</p>
 
                     <th className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'>
                       Actions
+                    </th>
+                    <th
+                      scope='col'
+                      className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'
+                    >
+                      <button className='flex items-center gap-x-2'>
+                        <span>Resume</span>
+                      </button>
                     </th>
                   </tr>
                 </thead>
@@ -215,7 +226,6 @@ if(isError) return <p>{error.message}</p>
                         {/* Complete Button */}
                         <button
                           disabled={job.status !== 'In Progress'}
-                          onClick={() => handleStatus(job._id, 'Complete')}
                           title='Mark Complete'
                           className='text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none disabled:cursor-not-allowed'
                         >
@@ -235,6 +245,20 @@ if(isError) return <p>{error.message}</p>
                           </svg>
                         </button>
                       </td>
+                      <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
+                        {/* <button> {job.resume}</button> */}
+                     <a href={job.resume}>Download pdf</a>
+                     {/* onClick={() => 
+                      toPDF()
+                      generatePDF(targetRef, {filename: 'page.pdf'})
+
+                      } */}
+                     
+                      {/* <div ref={targetRef}> {job.resume}
+            Content to be generated to PDF
+         </div> */}
+                      </td>
+
                     </tr>
                   ))}
                 </tbody>
