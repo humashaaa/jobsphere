@@ -28,35 +28,12 @@ const JobDetails = () => {
         postingDate,
         deadline,
         description,
-        applicantsNumber,
+        applicant_num,
         min_price,
         max_price,
         buyer
       } = job;
       console.log(job);
-
-
-
-    //   const {isPending, data: job =[], isError, error, mutateAsync} = useMutation({
-    //     mutationFn: async(id)=>{
-    //       const { data } = await axios.patch(`/bid/${id}`)
-    //   console.log(data)
-    //   return data
-
-    //     }
-       
-    // })
-    
-    // if(isPending){
-    //     return <div className="item-center justify-center"><span className="loading loading-spinner text-neutral"></span></div>
-    // }
-    // if(isError) return <p>{error.message}</p>
-
-
-
-
-
-
 
 
       const handleFormSubmit = async (e) => {
@@ -108,10 +85,6 @@ const JobDetails = () => {
     
 // mutateAsync({id})
         }
-
-      
-      
- 
 
       
           
@@ -198,7 +171,7 @@ const JobDetails = () => {
 						<p className='text-gray-500'>Already Applied</p>
 					</td>
 					<td className="p-3">
-						<p className='font-semibold'>{applicantsNumber}</p>
+						<p className='font-semibold'>{applicant_num}</p>
 					</td>
 					
 				</tr>
@@ -259,6 +232,7 @@ const JobDetails = () => {
                 id="price"
                 type="text"
                 name="price"
+                required
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
             </div>

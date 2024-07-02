@@ -6,20 +6,11 @@ import { motion } from "framer-motion"
 const Extra = () => {
     return (
         <motion.div
-        // variants={{
-        //     hidden: {opacity:0, y:75},
-        //     visible:{opacity:1, y:0}
-        // }}
-        // initial='hidden'
-        // animate='visible'
+        
          initial={{opacity: 0, y:500}}
          animate={{opacity: 1, y:0}}
          transition={{duration:2, delay:1}}
 
-        // whileInView={{opacity:0}}
-        // viewport={{
-        //     amount:'all'
-        // }}
         >
         <div className='flex mt-16 item-center md:gap-10 md:flex-row flex-col '>
 

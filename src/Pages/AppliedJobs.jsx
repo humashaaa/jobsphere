@@ -16,8 +16,6 @@ const AppliedJob = () => {
   // const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
   const targetRef = useRef();
 
-
-
   const {isPending, data: appliedJobs, isError, error, refetch} = useQuery({
     queryKey: ['appliedJobs'],
     queryFn: async ()=>{
@@ -35,35 +33,6 @@ if(isPending){
 if(isError) return <p>{error.message}</p>
 
 
-
-
-
-
-
-  // const [appliedJobs, setAppliedJobs] = useState([])
-
-  // useEffect(() => {
-  //   getData()
-  // }, [user])
-
-  // const getData = async () => {
-  //   const { data } = await axios(
-  //     `${import.meta.env.VITE_URL}/appliedJobs/${user?.email}`
-  //   )
-  //   setAppliedJobs(data)
-  // }
-  // console.log(appliedJobs);
-
-
-
-  // const handleStatus = async (id, status) => {
-  //   const { data } = await axios.patch(
-  //     `${import.meta.env.VITE_URL}/jobs/${id}`,
-  //     { status }
-  //   )
-  //   console.log(data)
-  //   getData()
-  // }
  
   
   return (

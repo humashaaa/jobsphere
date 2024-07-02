@@ -7,22 +7,13 @@ import { useQuery } from '@tanstack/react-query'
 const JobRequest = () => {
   const { user } = useAuth()
 
-  // const [jobs, setJobs] = useState([])
-
-  // useEffect(() => {
-  //   getData()
-  // }, [user])
-
  
 
 
   const {isPending, data: jobs = [], isError, error} = useQuery({
     queryKey: ['jobRequest', user?.email],
     queryFn: ()=> getData()
-  //   async ()=>{
-  //     const res = await fetch(`${import.meta.env.VITE_URL}/jobRequest/${user?.email}`);
-  //     return res.json()
-  // }
+  
 })
 console.log(jobs);
 const getData = async () => {
@@ -37,26 +28,6 @@ if(isPending){
 }
 if(isError) return <p>{error.message}</p>
 
-
-
-
-
-
-
-
-  // console.log(jobs);
-
-  // const handleStatus = async(id, previous, status)=>{
-  //   // console.log(id, previous, status);
-  //   const { data } = await axios.patch(
-  //     `${import.meta.env.VITE_URL}/myJob/${id}`, 
-  //     {status}
-  //   )
-  //   console.log(data);
-  //   getData()
-
-
-  // }
 
 
   return (
@@ -198,9 +169,7 @@ if(isError) return <p>{error.message}</p>
                         <div className='flex items-center gap-x-6'>
                           {/* Accept Button: In Progress */}
                           <button
-                            onClick={() =>
-                              handleStatus(job._id, job.status, 'In Progress')
-                            }
+                            
                             disabled={job.status === 'Complete'}
                             className='disabled:cursor-not-allowed text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none'
                           >
@@ -221,10 +190,6 @@ if(isError) return <p>{error.message}</p>
                           </button>
                           {/* Reject Button */}
                           <button
-                            onClick={() =>
-                              handleStatus(job._id, job.status, 'Rejected')
-                            }
-                            disabled={job.status === 'Complete'}
                             className='disabled:cursor-not-allowed text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none'
                           >
                             <svg

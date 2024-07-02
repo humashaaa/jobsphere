@@ -7,11 +7,7 @@ import { useEffect, useState } from "react";
 const Nav = () => {
 
   const {logOut, user}= useAuth()
-  // const handleSignOut = ()=>{
-  //   logOut()
-  //   .then()
-  //   .catch()
-  // }
+  
 
   const [theme, setTheme] = useState('light')
 

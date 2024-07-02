@@ -41,6 +41,7 @@ const AddJobs = () => {
         buyerName,
         photo
       },
+      applicant_num : 0,
     }
     try {
       const { data } = await axios.post(

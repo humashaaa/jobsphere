@@ -10,11 +10,13 @@ const JobCard = ({ job }) => {
     postingDate,
     deadline,
     salaryRange,
-    applicantsNumber,
+    applicant_num,
     min_price,
-    max_price, _id
-  } = job;
+    max_price,
+     _id
+  } = job || {}
   // console.log(job);
+  console.log(applicant_num);
   return (
     <div className="mt-12">
       <div
@@ -34,7 +36,7 @@ const JobCard = ({ job }) => {
           </div>
           <p><span className="font-semibold">Salary Range</span>: <span>${min_price} - ${max_price}</span></p>
 
-          <p> <span className="font-semibold"> Applicants number</span>: {applicantsNumber}</p>
+          <p> <span className="font-semibold"> Applicants number</span>:  {applicant_num}</p>
          
             <p> <span className="font-semibold">Job posting date</span>:  {new Date(postingDate).toLocaleDateString()}</p>
           <p> <span className="font-semibold text-red-700">Application Ends</span>: {new Date(deadline).toLocaleDateString()}</p>

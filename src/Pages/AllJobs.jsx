@@ -17,6 +17,7 @@ const AllJobs = () => {
       }
   })
 
+
   useEffect(()=>{
     refetch()
   }, [search, refetch])
@@ -27,21 +28,9 @@ const AllJobs = () => {
   if(isError) return <p>{error.message}</p>
   // const {_id} = jobs
 
+ console.log(jobs);
 
-
-    // const [jobs, setJobs] = useState([])
   
-    // useEffect(() => {
-    //   getData()
-    // }, [user])
-  
-    // const getData = async () => {
-    //   const { data } = await axios(
-    //     `${import.meta.env.VITE_URL}/jobs`
-    //   )
-    //   setJobs(data)
-    // }
-    // console.log(jobs);
 
     const handleSearch = e => {
       e.preventDefault()
@@ -191,7 +180,7 @@ const AllJobs = () => {
                       </td>
                       <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
                       <Link
-                      //  to={`/job/${_id}`}
+                      //  to={`/job/${jobs._id}`}
                         className="btn bg-blue-500 hover:bg-blue-700 text-white">View Details</Link>
                       </td>
                     </tr>
